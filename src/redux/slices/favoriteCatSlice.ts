@@ -6,7 +6,7 @@ interface favCatsState {
 }
 
 const initialState: favCatsState = {
-  favCats: [],
+  favCats: JSON.parse(localStorage.getItem('cats')!) || [],
 }
 
 const favCatsSlice = createSlice ({
