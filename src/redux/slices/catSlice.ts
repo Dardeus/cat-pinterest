@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axios from "axios";
 
-enum Status {
+export enum Status {
   LOADING = 'loading',
   SUCCESS = 'success',
   ERROR = 'error'
@@ -15,12 +15,12 @@ export type CatProps = {
 }
 
 interface CatState {
-  items: CatProps[]
+  allCats: CatProps[]
   status: Status
 }
 
 const initialState: CatState = {
-  items: [],
+  allCats: [],
   status: Status.LOADING,
 }
 
@@ -41,21 +41,21 @@ const catSlice = createSlice ({
   initialState,
   reducers: {
     setItem(state, action: PayloadAction<CatProps[]>) {
-      state.items = action.payload;
+      state.allCats = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCats.pending, (state) => {
       state.status = Status.LOADING
-      state.items = []
+      state.allCats = []
     })
     builder.addCase(fetchCats.fulfilled, (state, action) => {
-      state.items = action.payload
       state.status = Status.SUCCESS
+      state.allCats = action.payload
     })
     builder.addCase(fetchCats.rejected, (state) => {
       state.status = Status.ERROR
-      state.items = []
+      state.allCats = []
     })
   }
 })

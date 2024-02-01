@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/cat-pinterest.iml" filepath="$PROJECT_DIR$/.idea/cat-pinterest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react-pizzeria/.idea/react-pizzeria.iml" filepath="$PROJECT_DIR$/../react-pizzeria/.idea/react-pizzeria.iml" />
     </modules>
   </component>
 </project>
