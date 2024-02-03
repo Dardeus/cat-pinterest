@@ -14,7 +14,7 @@ const App = () => {
       <Header activeTab={activeTab} setActiveChapter={setActiveChapter}/>
       <div className="content">
         <Routes>
-          <Route path='/' element={<Home activeTab={activeTab}/>}/>
+          <Route path='/cat-pinterest/' element={<Home activeTab={activeTab}/>}/>
         </Routes>
       </div>
     </div>
