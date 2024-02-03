@@ -4,6 +4,8 @@
   padding-left: 62px;
 
   .header_link {
+    border: 0;
+    background: #2196F3;
     padding: 21px 26px 23px 23px;
     text-decoration: none;
     font-family: Roboto, sans-serif;
@@ -17,5 +19,5 @@
 }
 
 .focused {
-  background: #1E88E5;
+  background: #1E88E5 !important;
 }

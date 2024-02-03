@@ -40,6 +40,9 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
       const queryString = qs.stringify({activeTab})
       navigate(`?${queryString}`)
     }
+    else {
+      navigate(``)
+    }
   }, [activeTab]);
 
   return (
