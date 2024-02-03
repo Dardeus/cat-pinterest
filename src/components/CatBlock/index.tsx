@@ -14,8 +14,6 @@ type CatBlockProps = {
 const CatBlock: React.FC<CatBlockProps> = ({favCats, cat}) => {
   const dispatch = useAppDispatch()
 
-  console.log(favCats)
-
   return (
     <div className={styles.root}>
       <img

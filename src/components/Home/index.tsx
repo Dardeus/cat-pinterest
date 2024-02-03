@@ -5,6 +5,8 @@ import {useSelector} from "react-redux";
 import CatBlock from "../CatBlock";
 import styles from './Home.module.scss'
 import {Tab} from "../../App";
+import {useNavigate} from "react-router-dom";
+import qs from "qs"
 
 type HomeProps = {
   activeTab: Tab
@@ -15,6 +17,7 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
   const {allCats, status} = useSelector((state: RootState) => state.cats)
   const {favCats} = useSelector((state: RootState) => state.favCats)
   const notFirstLoad = useRef(false)
+  const navigate = useNavigate()
   const getPizzas = async () => {
     dispatch(fetchCats(
       'https://api.thecatapi.com/v1/images/search?limit=15&api_key=live_R7fkn57sI3CK07vGDjAoH5gLGGLirfOszbEzP9ofCX4nhFpEV2WjbelFg7KOIfs4'
@@ -32,6 +35,12 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
     getPizzas()
   }, [])
 
+  useEffect(() => {
+    if (activeTab !== "all") {
+      const queryString = qs.stringify({activeTab})
+      navigate(`?${queryString}`)
+    }
+  }, [activeTab]);
 
   return (
     <div className={styles.root}>

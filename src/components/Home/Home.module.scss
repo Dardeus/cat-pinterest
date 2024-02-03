@@ -1,7 +1,18 @@
 .root {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 316px);
 
-  padding-left: 62px;
-  padding-top: 48px;
+  margin: 48px 62px;
+  justify-content: space-between;
+  column-gap: min(48px);
+
+  @media (max-width: 1870px){
+    grid-template-columns: repeat(4, 316px);
+  }
+  @media (max-width: 1515px){
+    grid-template-columns: repeat(3, 316px);
+  }
+  @media (max-width: 1153px){
+    grid-template-columns: repeat(2, 316px);
+  }
 }

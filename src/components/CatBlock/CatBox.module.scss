@@ -2,8 +2,7 @@
   .cat_image {
     width: 316px;
     height: 316px;
-    margin-bottom: 48px;
-    margin-right: 48px;
+    margin-bottom: max(48px);
     transition: 0.75s;
     z-index: 1;
   }
@@ -11,24 +10,23 @@
   .favorite_heart{
     position: absolute;
     z-index: 2;
-    margin-top: 250px;
-    margin-left: 250px;
-    display: none;
+    margin-top: 270px;
+    margin-left: 270px;
+    opacity: 0;
   }
 
   &:hover {
-    * {
-      display: block;
-    }
-
     .cat_image {
       transform: scale(1.1);
       box-shadow: 0 5px 5px 2px #0000003D;
     }
 
     .favorite_heart {
-      margin-top: 270px;
-      margin-left: 270px;
+      opacity: 1;
+
+      &:hover {
+        background: url("../../assets/images/hovered_heart.svg");
+      }
     }
   }
 }
