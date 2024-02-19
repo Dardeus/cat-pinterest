@@ -15,4 +15,12 @@
   @media (max-width: 1153px){
     grid-template-columns: repeat(2, 316px);
   }
+  @media (max-width: 804px){
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  @media (max-width: 380px){
+    grid-template-columns: 1fr;
+    margin: 28px 32px;
+  }
 }
