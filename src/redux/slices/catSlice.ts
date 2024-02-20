@@ -25,7 +25,7 @@ const initialState: CatState = {
 }
 
 export const fetchCats = createAsyncThunk<CatProps[], string>(
-  'cats/fetchCatStatus',
+  'cats/fetchCats',
     async (url, thunkAPI) => {
     const { data } = await axios.get<CatProps[]>(url)
 
@@ -47,11 +47,10 @@ const catSlice = createSlice ({
   extraReducers: (builder) => {
     builder.addCase(fetchCats.pending, (state) => {
       state.status = Status.LOADING
-      state.allCats = []
     })
     builder.addCase(fetchCats.fulfilled, (state, action) => {
       state.status = Status.SUCCESS
-      state.allCats = action.payload
+      state.allCats.push(...action.payload.filter(newCat => !state.allCats.find(oldCat => oldCat.id===newCat.id)))
     })
     builder.addCase(fetchCats.rejected, (state) => {
       state.status = Status.ERROR

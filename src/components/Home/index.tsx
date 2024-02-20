@@ -18,7 +18,15 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
   const {favCats} = useSelector((state: RootState) => state.favCats)
   const notFirstLoad = useRef(false)
   const navigate = useNavigate()
-  const getPizzas = async () => {
+
+  const scrollHandler= (e:any) =>{
+    if(e.target.documentElement.scrollHeight-e.target.documentElement.scrollTop-window.innerHeight<50)
+    {
+      getCats()
+      window.scrollTo(0, (e.target.documentElement.scrollHeight/2));
+    }
+  }
+  const getCats = async () => {
     dispatch(fetchCats(
       'https://api.thecatapi.com/v1/images/search?limit=15&api_key=live_R7fkn57sI3CK07vGDjAoH5gLGGLirfOszbEzP9ofCX4nhFpEV2WjbelFg7KOIfs4'
     ))
@@ -32,7 +40,7 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
   }, [favCats])
 
   useEffect(() => {
-    getPizzas()
+    getCats()
   }, [])
 
   useEffect(() => {
@@ -44,6 +52,14 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
       navigate(``)
     }
   }, [activeTab]);
+
+  useEffect(()=>{
+    document.addEventListener('scroll',scrollHandler)
+    return ()=>{
+      document.removeEventListener('scroll',scrollHandler)
+    }
+  },[])
+
 
   return (
     <div className={styles.root}>
