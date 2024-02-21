@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {CatProps, fetchCats} from "../../redux/slices/catSlice";
 import {RootState, useAppDispatch} from "../../redux/store";
 import {useSelector} from "react-redux";
@@ -17,13 +17,16 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
   const {allCats, status} = useSelector((state: RootState) => state.cats)
   const {favCats} = useSelector((state: RootState) => state.favCats)
   const notFirstLoad = useRef(false)
+  const [toScroll, setToScroll] = useState(0)
   const navigate = useNavigate()
 
   const scrollHandler= (e:any) =>{
-    if(e.target.documentElement.scrollHeight-e.target.documentElement.scrollTop-window.innerHeight<50)
+    const dif = e.target.documentElement.scrollHeight-e.target.documentElement.scrollTop-window.innerHeight
+    if(dif<50 && e.target.documentElement.scrollHeight > window.innerHeight)
     {
+      window.scrollTo(0, 0);
       getCats()
-      window.scrollTo(0, (e.target.documentElement.scrollHeight/2));
+      setToScroll(e.target.documentElement.scrollHeight - window.innerHeight/2)
     }
   }
   const getCats = async () => {
@@ -31,6 +34,14 @@ const Home: React.FC<HomeProps> = ({ activeTab }) => {
       'https://api.thecatapi.com/v1/images/search?limit=15&api_key=live_R7fkn57sI3CK07vGDjAoH5gLGGLirfOszbEzP9ofCX4nhFpEV2WjbelFg7KOIfs4'
     ))
   }
+
+  useEffect(() => {
+    if (allCats.length){
+      window.scrollTo(0, toScroll);
+      console.log(toScroll)
+      console.log('setted')
+    }
+  }, [allCats]);
 
   useEffect(() => {
     if (notFirstLoad.current) {
